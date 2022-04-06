@@ -3,19 +3,13 @@ from colorama import Fore
 from os import system
 from time import sleep
 from datetime import datetime
-import csv
+import json
 from symbols_for_password import symbols_for_password
 
-headers = ("date created ", "password")
-
-with open(file="save_password.csv", mode="w") as file:
-    writer = csv.writer(file)
-
-    writer.writerow(headers)
 
 
 def generator_password():
-    print(f'{Fore.RED}Enter count symbol for password only 1 to 68')
+    print(f'{Fore.RED}Enter count symbol for password only 1 to 82')
     question_user = int(input(f'{Fore.GREEN}Enter count symbol for password: '))
 
     date_and_time = datetime.today()
@@ -31,11 +25,14 @@ def generator_password():
     if question_user > len(symbols_for_password):
         message_for_user()
 
+
     for i in range(question_user):
         password = f'{password}{symbols_for_password[randint(0, len(symbols_for_password) - 1)]}'
-    with open(file="save_password.csv", mode="a") as file:
-        writer = csv.writer(file)
-        writer.writerow([str(date_and_time),password])
+    date_created_password = {str(date_and_time): password}
+
+
+    with open(file="save_password.json", mode="a") as file:
+        json.dump(date_created_password, file,indent=2)
 
 
 while True:
