@@ -9,7 +9,7 @@ from symbols_for_password import symbols_for_password
 
 
 def generator_password():
-    print(f'{Fore.RED}Enter count symbol for password only 1 to 2048 ')
+    print(f'{Fore.RED}Enter count symbol for password only 1 to 2048')
     question_user = int(input(f'{Fore.GREEN}Enter count symbol for password: '))
 
     date_and_time = datetime.today()
