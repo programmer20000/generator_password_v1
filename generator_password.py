@@ -3,7 +3,7 @@ from colorama import Fore
 from os import system
 from time import sleep
 from datetime import datetime
-import json
+import csv
 from symbols_for_password import symbols_for_password
 
 
@@ -15,7 +15,7 @@ def generator_password():
     date_and_time = datetime.today()
 
     def message_for_user():
-        print('error')
+        print(f'{Fore.RED} Please enter count symbol for password only 1 to 2048')
         sleep(6)
         system('cls')
         exit()
@@ -28,12 +28,22 @@ def generator_password():
 
     for i in range(question_user):
         password = f'{password}{symbols_for_password[randint(0, len(symbols_for_password) - 1)]}'
-    date_created_password = {str(date_and_time): password}
+    date_created_password = f"{date_and_time}{password}"
 
+    with open(file="save_password.csv", mode="w") as file:
+        writer = csv.writer(file)
+        writer.writerow(
+            (
+                "password".upper(),
+                "date_created_password".upper(),
+            )
+        )
 
-    with open(file="save_password.json", mode="a") as file:
-        json.dump(date_created_password, file,indent=2)
-
+    with open(file="save_password.csv", mode="a") as file:
+        writer = csv.writer(file)
+        writer.writerow(
+          [date_created_password,password]
+        )
 
 while True:
     generator_password()
