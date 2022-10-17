@@ -28,7 +28,7 @@ def generator_password():
 
     for i in range(question_user):
         password = f'{password}{symbols_for_password[randint(0, len(symbols_for_password) - 1)]}'
-    date_created_password = f"{date_and_time}{password}"
+    date_created_password = f"{date_and_time}  {password}"
 
     with open(file="save_password.csv", mode="w") as file:
         writer = csv.writer(file)
@@ -39,7 +39,7 @@ def generator_password():
             )
         )
 
-    with open(file="save_password.csv", mode="a") as file:
+    with open(file="save_password.csv", mode="a",newline='') as file:
         writer = csv.writer(file)
         writer.writerow(
           [date_created_password,password]
