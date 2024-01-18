@@ -1,4 +1,4 @@
-# generator_password_variance_1
+# generator password version 1
 
 # how to run project on Windows
 
